@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roteiro Interativo: 6 Dias em Bariloche</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Cool Blues and Warm Neutrals -->
+    <!-- Application Structure Plan: Um SPA (Single Page Application) baseado em abas. Uma barra de navegação superior persistente com botões para "Dia 1" a "Dia 6". Clicar em um botão revela o itinerário detalhado daquele dia (imagem, descrição, atividades, sugestões de restaurantes) enquanto oculta todos os outros. Esta estrutura foi escolhida por dividir um roteiro denso de 6 dias em blocos de visualização única e digeríveis, tornando-o muito fácil de usar e navegar tanto em desktop quanto em dispositivos móveis. A interação principal é a seleção do dia, que controla diretamente a visualização do conteúdo principal. -->
+    <!-- Visualization & Content Choices: Informação do Relatório: Roteiro de 6 dias. Objetivo: Apresentar planos diários de forma clara. Visualização/Apresentação: Cards HTML/Tailwind para o conteúdo de cada dia (div com id='day-X'). Interação: Eventos JS onclick nos botões de navegação alternam a classe 'hidden' nesses cards. Justificativa: Esta é a maneira mais simples e eficaz de criar um itinerário "interativo" sem complicar com gráficos (que não são necessários). Informação do Relatório: Sugestões de restaurantes. Objetivo: Listar opções. Visualização/Apresentação: Lista/cards HTML estilizados dentro da visualização de cada dia. Interação: Nenhuma, texto estático. Justificativa: Claro e simples. Informação do Relatório: "Imagens Reais". Objetivo: Contexto visual. Visualização/Apresentação: Imagens de placehold.co (conforme instruções) estilizadas com Tailwind (rounded-lg, shadow-md). Interação: Nenhuma. Justificativa: Cumpre a solicitação dentro das restrições técnicas. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .day-btn.active {
+            background-color: #1d4ed8;
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .day-content {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+    <header class="bg-blue-700 text-white p-6 sm:p-8 shadow-lg sticky top-0 z-10">
+        <div class="max-w-5xl mx-auto">
+            <h1 class="text-3xl sm:text-4xl font-bold">Roteiro Interativo: Bariloche</h1>
+            <p class="text-lg sm:text-xl text-blue-100 mt-1">6 Dias de Aventura e Paisagens Clássicas</p>
+        </div>
+    </header>
+
+    <div class="max-w-5xl mx-auto p-4 sm:p-6">
+        <nav class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8">
+            <button id="btn-day-1" data-day="1" class="day-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 shadow-md">Dia 1</button>
+            <button id="btn-day-2" data-day="2" class="day-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 shadow-md">Dia 2</button>
+            <button id="btn-day-3" data-day="3" class="day-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 shadow-md">Dia 3</button>
+            <button id="btn-day-4" data-day="4" class="day-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 shadow-md">Dia 4</button>
+            <button id="btn-day-5" data-day="5" class="day-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 shadow-md">Dia 5</button>
+            <button id="btn-day-6" data-day="6" class="day-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 shadow-md">Dia 6</button>
+        </nav>
+
+        <main id="itinerary-content">
+            
+            <div id="day-content-1" class="day-content bg-white rounded-lg shadow-xl overflow-hidden">
+                <img src="https://placehold.co/1200x500/607d8b/ffffff?text=Centro+Cívico+de+Bariloche" alt="Centro Cívico de Bariloche" class="w-full h-48 sm:h-72 object-cover">
+                <div class="p-6 sm:p-8">
+                    <h2 class="text-3xl font-bold mb-3">Dia 1: Chegada e Coração de Bariloche</h2>
+                    <span class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full mb-4">Clássico</span>
+                    <p class="text-lg mb-6">Bem-vindo a Bariloche! Após se instalar, dedique o dia a explorar o charmoso Centro Cívico, com sua arquitetura alpina. Passeie pela Rua Mitre, o paraíso dos chocolates, e sinta a atmosfera da cidade à beira do Lago Nahuel Huapi.</p>
+                    
+                    <h3 class="text-2xl font-semibold mb-3">Atividades Principais</h3>
+                    <ul class="list-disc list-inside space-y-2 mb-6 text-lg">
+                        <li>Visitar o Centro Cívico e tirar a foto clássica com os cães São Bernardo (opcional).</li>
+                        <li>Caminhar pela Rua Mitre e degustar chocolates (Rapa Nui, Mamuschka, etc.).</li>
+                        <li>Admirar o pôr do sol no Lago Nahuel Huapi.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-semibold mb-4">Sugestões de Restaurantes</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                            <h4 class="text-xl font-bold">Almoço (Leve)</h4>
+                            <p class="text-base">Rapa Nui (além de chocolates, tem um café e lanches deliciosos).</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                            <h4 class="text-xl font-bold">Jantar (Parrilla)</h4>
+                            <p class="text-base">El Boliche de Alberto (famoso pela carne argentina de alta qualidade).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="day-content-2" class="day-content bg-white rounded-lg shadow-xl overflow-hidden hidden">
+                <img src="https://placehold.co/1200x500/4caf50/ffffff?text=Vista+do+Cerro+Campanario" alt="Vista do Cerro Campanario" class="w-full h-48 sm:h-72 object-cover">
+                <div class="p-6 sm:p-8">
+                    <h2 class="text-3xl font-bold mb-3">Dia 2: Circuito Chico e Vistas Incríveis</h2>
+                    <span class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full mb-4">Clássico</span>
+                    <p class="text-lg mb-6">Hoje é dia de conhecer o famoso Circuito Chico, um passeio panorâmico de meio dia que contorna o Lago Nahuel Huapi e Moreno. A parada obrigatória é o Cerro Campanario, com uma subida de teleférico que revela uma das vistas mais deslumbrantes do mundo.</p>
+                    
+                    <h3 class="text-2xl font-semibold mb-3">Atividades Principais</h3>
+                    <ul class="list-disc list-inside space-y-2 mb-6 text-lg">
+                        <li>Subir o Cerro Campanario (teleférico) para a vista 360º.</li>
+                        <li>Parar no Punto Panorámico para fotos espetaculares.</li>
+                        <li>Visitar a Capela de San Eduardo e admirar o Hotel Llao Llao (por fora).</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-semibold mb-4">Sugestões de Restaurantes</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                            <h4 class="text-xl font-bold">Almoço (Com Vista)</h4>
+                            <p class="text-base">Cervecería Patagonia (no Km 24.7 do Circuito Chico, com vistas espetaculares).</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                            <h4 class="text-xl font-bold">Jantar (Parrilla)</h4>
+                            <p class="text-base">Alto el Fuego Parrilla (ambiente rústico e carnes excelentes).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="day-content-3" class="day-content bg-white rounded-lg shadow-xl overflow-hidden hidden">
+                <img src="https://placehold.co/1200x500/03a9f4/ffffff?text=Esquiando+no+Cerro+Catedral" alt="Esquiando no Cerro Catedral" class="w-full h-48 sm:h-72 object-cover">
+                <div class="p-6 sm:p-8">
+                    <h2 class="text-3xl font-bold mb-3">Dia 3: Aventura na Neve - Esqui!</h2>
+                    <span class="inline-block bg-orange-100 text-orange-800 text-sm font-semibold px-3 py-1 rounded-full mb-4">Aventura / Esqui</span>
+                    <p class="text-lg mb-6">Esquiar! O Cerro Catedral é o maior centro de esqui da América do Sul. Mesmo que seja iniciante, você pode alugar equipamentos e contratar uma aula na base da montanha para aproveitar as pistas.</p>
+                    
+                    <h3 class="text-2xl font-semibold mb-3">Atividades Principais</h3>
+                    <ul class="list-disc list-inside space-y-2 mb-6 text-lg">
+                        <li>Dia inteiro de esqui ou snowboard no Cerro Catedral.</li>
+                        <li>Aluguel de equipamentos e aula para iniciantes (recomenda-se reservar).</li>
+                        <li>Para não-esquiadores: subida pelos teleféricos (pedestres) para apreciar a vista.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-semibold mb-4">Sugestões de Restaurantes</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                            <h4 class="text-xl font-bold">Almoço (Na Montanha)</h4>
+                            <p class="text-base">La Roca ou Punta Princesa (refúgios na montanha com boa comida e vistas).</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                            <h4 class="text-xl font-bold">Jantar (Fondue)</h4>
+                            <p class="text-base">La Marmite (um clássico de Bariloche para comer fondue de queijo e chocolate).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="day-content-4" class="day-content bg-white rounded-lg shadow-xl overflow-hidden hidden">
+                <img src="https://placehold.co/1200x500/795548/ffffff?text=Ventisquero+Negro+(Geleira)" alt="Ventisquero Negro Geleira" class="w-full h-48 sm:h-72 object-cover">
+                <div class="p-6 sm:p-8">
+                    <h2 class="text-3xl font-bold mb-3">Dia 4: Aventura na Geleira - Cerro Tronador</h2>
+                    <span class="inline-block bg-orange-100 text-orange-800 text-sm font-semibold px-3 py-1 rounded-full mb-4">Aventura / Geleira</span>
+                    <p class="text-lg mb-6">Este é o dia da sua segunda solicitação especial: ver uma geleira de perto. O passeio ao Cerro Tronador é uma expedição de dia inteiro que leva você ao "Ventisquero Negro", uma geleira escura única que desce da montanha. O caminho é de rípio e cheio de paisagens selvagens.</p>
+                    
+                    <h3 class="text-2xl font-semibold mb-3">Atividades Principais</h3>
+                    <ul class="list-disc list-inside space-y-2 mb-6 text-lg">
+                        <li>Excursão de dia inteiro (van ou 4x4) ao Cerro Tronador.</li>
+                        <li>Caminhada leve até a base do Ventisquero Negro para ver e ouvir o gelo.</li>
+                        <li>Apreciar a paisagem da montanha mais alta da região.</li>
+                        <li>Nota: Esta é a "geleira" acessível de Bariloche. O famoso Glaciar Perito Moreno fica em El Calafate, muito distante.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-semibold mb-4">Sugestões de Restaurantes</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                            <h4 class="text-xl font-bold">Almoço (No Passeio)</h4>
+                            <p class="text-base">Pampa Linda (base do Tronador, comida caseira simples) ou leve um lanche reforçado.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                            <h4 class="text-xl font-bold">Jantar (Regional)</h4>
+                            <p class="text-base">Familia Weiss (pratos patagônicos e alemães tradicionais em um ambiente acolhedor).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="day-content-5" class="day-content bg-white rounded-lg shadow-xl overflow-hidden hidden">
+                <img src="https://placehold.co/1200x500/2196f3/ffffff?text=Navegação+Isla+Victoria" alt="Navegação Isla Victoria" class="w-full h-48 sm:h-72 object-cover">
+                <div class="p-6 sm:p-8">
+                    <h2 class="text-3xl font-bold mb-3">Dia 5: Navegação e Bosques Mágicos</h2>
+                    <span class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full mb-4">Clássico</span>
+                    <p class="text-lg mb-6">Um dia dedicado às águas do Lago Nahuel Huapi. O passeio de barco clássico leva à Isla Victoria e ao Bosque de Arrayanes. É uma caminhada tranquila por uma floresta única no mundo, com árvores de cor canela que (dizem) inspiraram a Disney.</p>
+                    
+                    <h3 class="text-2xl font-semibold mb-3">Atividades Principais</h3>
+                    <ul class="list-disc list-inside space-y-2 mb-6 text-lg">
+                        <li>Navegação de catamarã pelo Lago Nahuel Huapi.</li>
+                        <li>Caminhada pela passarela de madeira no Bosque de Arrayanes.</li>
+                        <li>Explorar as trilhas da Isla Victoria.</li>
+                        <li>Opção alternativa de navegação: Puerto Blest e Cascada de los Cántaros.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-semibold mb-4">Sugestões de Restaurantes</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                            <h4 class="text-xl font-bold">Almoço (Passeio)</h4>
+                            <p class="text-base">Leve um lanche ou utilize a lanchonete simples do barco/ilha.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                            <h4 class="text-xl font-bold">Jantar (Sofisticado)</h4>
+                            <p class="text-base">El Patacón (ambiente incrível e pratos de cordeiro patagônico ou truta).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="day-content-6" class="day-content bg-white rounded-lg shadow-xl overflow-hidden hidden">
+                <img src="https://placehold.co/1200x500/ff9800/ffffff?text=Aventura+em+Piedras+Blancas" alt="Aventura em Piedras Blancas" class="w-full h-48 sm:h-72 object-cover">
+                <div class="p-6 sm:p-8">
+                    <h2 class="text-3xl font-bold mb-3">Dia 6: Aventura Leve e Despedida</h2>
+                    <span class="inline-block bg-orange-100 text-orange-800 text-sm font-semibold px-3 py-1 rounded-full mb-4">Aventura</span>
+                    <p class="text-lg mb-6">Para o último dia, uma aventura mais leve (dependendo do horário do seu voo). Piedras Blancas é um parque de diversões na neve (no inverno) ou com atividades de montanha (no verão), famoso pelo "trineo" (trenó de montanha). É diversão garantida antes de ir para o aeroporto.</p>
+                    
+                    <h3 class="text-2xl font-semibold mb-3">Atividades Principais</h3>
+                    <ul class="list-disc list-inside space-y-2 mb-6 text-lg">
+                        <li>Manhã de diversão em Piedras Blancas (trenó de montanha ou Zipline).</li>
+                        <li>Alternativa: Subir no Teleférico Cerro Otto (Confeitaria Giratória).</li>
+                        <li>Compras de última hora na Rua Mitre.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-semibold mb-4">Sugestões de Restaurantes</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                            <h4 class="text-xl font-bold">Almoço (Cervejaria)</h4>
+                            <p class="text-base">Manush Cervecería (excelentes cervejas artesanais e hambúrgueres gourmet).</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                            <h4 class="text-xl font-bold">Jantar</h4>
+                            <p class="text-base">Dependente do horário do voo de partida.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- <footer class="text-center p-6 text-slate-500 mt-8">
+        <p>Este roteiro é uma sugestão e pode ser adaptado. Verifique sempre a disponibilidade e reserve passeios com antecedência.</p>
+    </footer> -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const dayButtons = document.querySelectorAll('.day-btn');
+            const dayContents = document.querySelectorAll('.day-content');
+            const activeBtnClass = 'active';
+            const inactiveBtnClass = 'bg-blue-500 hover:bg-blue-600';
+
+            function showDay(dayNumber) {
+                dayContents.forEach(content => {
+                    if (content.id === `day-content-${dayNumber}`) {
+                        content.classList.remove('hidden');
+                    } else {
+                        content.classList.add('hidden');
+                    }
+                });
+
+                dayButtons.forEach(button => {
+                    if (button.dataset.day === dayNumber) {
+                        button.classList.add(...activeBtnClass.split(' '));
+                        button.classList.remove(...inactiveBtnClass.split(' '));
+                    } else {
+                        button.classList.remove(...activeBtnClass.split(' '));
+                        button.classList.add(...inactiveBtnClass.split(' '));
+                    }
+                });
+            }
+
+            dayButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const day = this.dataset.day;
+                    showDay(day);
+                });
+            });
+
+            showDay('1');
+        });
+    </script>
+</body>
+</html>
